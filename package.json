@@ -1,0 +1,22 @@
+{
+  "name": "project-qr",
+  "version": "1.0.0",
+  "main": "app.ts",
+  "scripts": {
+    "dev": "ts-node app.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "ts-node": "^10.9.2"
+  },
+  "dependencies": {
+    "@types/pdfkit": "^0.13.5",
+    "pdfkit": "^0.15.0",
+    "project-qr": "file:",
+    "qrcode": "^1.5.4",
+    "sharp": "^0.33.5"
+  }
+}

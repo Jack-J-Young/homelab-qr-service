@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+  width="25mm"
+  height="25mm"
+  viewBox="0 0 100 100"
+  fill="transparent">
+    <rect fill="white"
+      width="100" height="100"
+      stroke="black"
+      stroke-width="1" />
+      
+    <!-- <image image-rendering="pixelated"
+      href="https://i.imgur.com/5eXXI12.png"
+      x="15" y="10"
+      width="70" height="70"/> -->
+      
+    <text fill="black"
+      text-anchor="middle"
+      font-weight="lighter"
+      font-family="monospace"
+      x="50.5" y="92">
+        M4CGU7Q3EF
+    </text>
+</svg>
