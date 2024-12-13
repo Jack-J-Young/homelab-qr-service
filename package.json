@@ -1,6 +1,6 @@
 {
-  "name": "project-qr",
-  "version": "1.0.1",
+  "name": "homelab-qr-service",
+  "version": "1.0.0",
   "main": "src/app.ts",
   "scripts": {
     "dev": "ts-node src/app.ts",
@@ -22,6 +22,7 @@
     "better-sqlite3": "^11.7.0",
     "body-parser": "^1.20.3",
     "express": "^4.21.2",
+    "homelab-qr-service": "file:",
     "pdfkit": "^0.15.0",
     "project-qr": "file:",
     "qrcode": "^1.5.4",

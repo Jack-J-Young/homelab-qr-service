@@ -28,7 +28,7 @@ const PDFGenOptions: PDFGenerationOptions = {
     guideColor: '#AAA',
     qrPadding: 3,
     textPadding: 1.5,
-    urlPrefix: 'https://api.jackyoung.xyz/'
+    urlPrefix: 'https://qr.jackyoung.xyz/'
 };
 
 // passwrd from env QR_PASSWORD
@@ -101,8 +101,6 @@ app.post('/e/:id', (req, res) => {
 
     if (req.body['password'] !== password) {
         res.send('Incorrect password');
-        console.log(password);
-        console.log(req.body['password']);
         return;
     }
 
