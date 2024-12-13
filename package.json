@@ -1,22 +1,28 @@
 {
   "name": "project-qr",
   "version": "1.0.0",
-  "main": "app.ts",
+  "main": "src/app.ts",
   "scripts": {
-    "dev": "ts-node app.ts"
+    "dev": "ts-node src/app.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/express": "^5.0.0",
+    "@types/qrcode": "^1.5.5",
     "ts-node": "^10.9.2"
   },
   "dependencies": {
     "@types/pdfkit": "^0.13.5",
+    "better-sqlite3": "^11.7.0",
+    "express": "^4.21.2",
     "pdfkit": "^0.15.0",
     "project-qr": "file:",
     "qrcode": "^1.5.4",
-    "sharp": "^0.33.5"
+    "sharp": "^0.33.5",
+    "sqlite3": "^5.1.7"
   }
 }
