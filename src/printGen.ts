@@ -1,5 +1,5 @@
 import PDFDocument from 'pdfkit';
-import * as qr from 'qrcode';
+import qr from 'qrcode';
 import { Response } from 'express';
 
 /**
@@ -36,7 +36,7 @@ export let pageSettings: PageSetting[] = [
 
 // Gen options
 export interface PDFGenerationOptions {
-    outputPath: string;
+    filename: string;
     
     // Refactor to set page size objects
     page?: PageSetting;
@@ -77,7 +77,7 @@ export async function QrIdListToPDF(idList: string[], res: Response, options: PD
     }
 
     res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader('Content-Disposition', 'attachment; filename="output.pdf"');
+    res.setHeader('Content-Disposition', `attachment; filename="${options.filename}"`);
 
     // Create a PDF document
     const doc = new PDFDocument({ size: options.page.name });

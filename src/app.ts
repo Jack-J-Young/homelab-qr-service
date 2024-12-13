@@ -1,7 +1,7 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import { generateQrIds } from './qrGen'
-import { getQrCount, pageSettings, PDFGenerationOptions, QrIdListToPDF } from './printGen'
+import { getQrCount, PDFGenerationOptions, QrIdListToPDF } from './printGen'
 import { QRDatabase, SheetsDatabase } from './dbWrapper'
 
 const app = express()
@@ -9,11 +9,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const port = 3000
 
+// Ensure db dir exists
+const fs = require('fs');
+const dir = './db';
+if (!fs.existsSync(dir)){
+    fs.mkdirSync(dir);
+}
+
 const qrDB = new QRDatabase();
 const sheetsDB = new SheetsDatabase();
 
 const PDFGenOptions: PDFGenerationOptions = {
-    outputPath: 'output.pdf',
+    filename: 'output.pdf',
     width: 25,
     height: 30,
     margin: 0,
@@ -52,6 +59,8 @@ app.get('/s/:id', (req, res) => {
         res.send('Sheet not found');
         return;
     }
+
+    PDFGenOptions.filename = `HomelabQR-${req.params.id}.pdf`;
 
     // Generate sheet view from list of QR codes
     QrIdListToPDF(sheet.qr_ids, res, PDFGenOptions);

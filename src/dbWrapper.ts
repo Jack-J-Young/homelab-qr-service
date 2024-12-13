@@ -1,9 +1,8 @@
 import Database, { Statement } from 'better-sqlite3';
-import path from 'path';
 
-// Paths to the SQLite database files
-const QR_DB_PATH = path.resolve(__dirname, 'qr.db');
-const SHEETS_DB_PATH = path.resolve(__dirname, 'sheets.db');
+// Paths to the SQLite database files (path is relative to the project root in db/)
+const QR_DB_PATH = 'db/qrs.db';
+const SHEETS_DB_PATH = 'db/sheets.db';
 
 // Type definition for a QR entry
 interface QREntry {
