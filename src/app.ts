@@ -31,6 +31,9 @@ const PDFGenOptions: PDFGenerationOptions = {
     urlPrefix: 'https://api.jackyoung.xyz/'
 };
 
+// passwrd from env QR_PASSWORD
+const password = process.env.QR_PASSWORD;
+
 app.get('/', (req, res) => {
     res.send('List sheets')
 });
@@ -91,6 +94,11 @@ app.post('/e/:id', (req, res) => {
         return;
     }
 
+    if (!req.body['password'] || req.body['password'] !== password) {
+        res.send('No password provided');
+        return;
+    }
+
     let redirectUrl = req.body['redirect-url'];
 
     // save redirect url to db
@@ -112,6 +120,8 @@ app.get('/e/:id', (req, res) => {
                 <form method="POST" action="/e/${req.params.id}">
                     <label for="redirect-url">Redirect URL:</label>
                     <input type="text" id="redirect-url" name="redirect-url">
+                    <br>
+                    <input type="text" id="password" name="password">
                     <button type="submit">Set</button>
                 </form>
             </body>
