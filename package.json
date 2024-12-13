@@ -18,6 +18,7 @@
   "dependencies": {
     "@types/pdfkit": "^0.13.5",
     "better-sqlite3": "^11.7.0",
+    "body-parser": "^1.20.3",
     "express": "^4.21.2",
     "pdfkit": "^0.15.0",
     "project-qr": "file:",

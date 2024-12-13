@@ -8,7 +8,7 @@ const SHEETS_DB_PATH = path.resolve(__dirname, 'sheets.db');
 // Type definition for a QR entry
 interface QREntry {
     id: string;
-    redirect_url: string;
+    redirect_url: string | null;
 }
 
 // Type definition for a Sheet entry
@@ -32,19 +32,43 @@ export class QRDatabase {
         this.db.exec(`
             CREATE TABLE IF NOT EXISTS qr_codes (
                 id TEXT PRIMARY KEY CHECK(length(id) = 6),
-                redirect_url TEXT NOT NULL
+                redirect_url TEXT DEFAULT NULL
             );
         `);
     }
 
     /**
-     * Add a QR entry to the database.
+     * Add a QR entry to the database with a nullable redirect URL.
      * @param id - The 6-character alphanumeric ID.
-     * @param redirectUrl - The redirect URL associated with the QR code.
+     * @param redirectUrl - The redirect URL associated with the QR code (optional).
      */
-    addQR(id: string, redirectUrl: string): void {
+    addQR(id: string, redirectUrl: string | null = null): void {
         const stmt: Statement = this.db.prepare('INSERT INTO qr_codes (id, redirect_url) VALUES (?, ?)');
         stmt.run(id, redirectUrl);
+    }
+
+    /**
+     * Add multiple QR entries to the database.
+     * @param ids - An array of 6-character alphanumeric IDs.
+     */
+    addMultipleQRs(ids: string[]): void {
+        const stmt: Statement = this.db.prepare('INSERT INTO qr_codes (id) VALUES (?)');
+        const insertMany = this.db.transaction((qrIds: string[]) => {
+            for (const id of qrIds) {
+                stmt.run(id);
+            }
+        });
+        insertMany(ids);
+    }
+
+    /**
+     * Update the redirect URL of an existing QR entry.
+     * @param id - The 6-character alphanumeric ID.
+     * @param redirectUrl - The new redirect URL to set.
+     */
+    updateQRRedirect(id: string, redirectUrl: string): void {
+        const stmt: Statement = this.db.prepare('UPDATE qr_codes SET redirect_url = ? WHERE id = ?');
+        stmt.run(redirectUrl, id);
     }
 
     /**

@@ -1,6 +1,6 @@
 import PDFDocument from 'pdfkit';
-import fs from 'fs';
 import * as qr from 'qrcode';
+import { Response } from 'express';
 
 /**
  * Generates a QR image from a URL.
@@ -71,16 +71,19 @@ export function getQrCount(options: PDFGenerationOptions): number {
  * @param options - The options for PDF generation process.
  * @returns A promise that resolves when the PDF generation is complete.
  */
-export async function QrIdListToPDF(idList: string[], options: PDFGenerationOptions): Promise<void> {
+export async function QrIdListToPDF(idList: string[], res: Response, options: PDFGenerationOptions): Promise<void> {
     if (!options.page) {
         options.page = pageSettings[0];
     }
+
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', 'attachment; filename="output.pdf"');
 
     // Create a PDF document
     const doc = new PDFDocument({ size: options.page.name });
 
     // Pipe output to the specified PDF path
-    doc.pipe(fs.createWriteStream(options.outputPath));
+    doc.pipe(res);
 
     // constants for converting page units to mm
     const pageWidth = doc.page.width;
