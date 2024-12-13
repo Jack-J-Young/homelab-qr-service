@@ -94,8 +94,15 @@ app.post('/e/:id', (req, res) => {
         return;
     }
 
-    if (!req.body['password'] || req.body['password'] !== password) {
+    if (!req.body['password']) {
         res.send('No password provided');
+        return;
+    }
+
+    if (req.body['password'] !== password) {
+        res.send('Incorrect password');
+        console.log(password);
+        console.log(req.body['password']);
         return;
     }
 
@@ -121,7 +128,9 @@ app.get('/e/:id', (req, res) => {
                     <label for="redirect-url">Redirect URL:</label>
                     <input type="text" id="redirect-url" name="redirect-url">
                     <br>
+                    <label for="password">Password:</label>
                     <input type="text" id="password" name="password">
+                    <br>
                     <button type="submit">Set</button>
                 </form>
             </body>
